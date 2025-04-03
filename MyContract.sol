@@ -3,26 +3,36 @@ pragma solidity ^0.8.0;
 
 contract MyContract{
     // State Variables
-    uint myUint=1; // Scope inside the entire smart contract
-    uint256 public myInt=1;
-    uint8 public EightByteInt=23;
-   
-    string public mystr="I am a dummy string";
-    bytes32 public my32bytestr="32 bytes string";
+    uint[] public arr;
+    uint[][] public TwoDimensionalArray=[[1,2,3],[4,5,6],[7,8,9]];
 
-    address public myAddress= 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
-    struct Student{
-        string name;
-        uint cgpa;
+
+// Function to add an item in the 1 d-array
+    function AddItem(uint  _item) public {
+    // will modify the state hence can't be public view
+            arr.push(_item);
     }
 
-    Student public s1=Student("Ashutosh",8);
+    
 
-    // Local Variables
-    function getValue() public pure returns(uint) {
-        uint value=1;
-        return value;
+    function AddItemIn2dArray(uint val,uint first, uint second) public {
+
+            uint rows=TwoDimensionalArray.length;
+            uint cols=TwoDimensionalArray[0].length;
+
+            if(first<rows && second< cols){
+                TwoDimensionalArray[first][second]=val;
+            }
+
     }
+    
+
+
+// Function to find the length of the array 
+    function FindLengthofSingleDimensionArray() public view returns(uint){
+        return arr.length;
+    }
+
 }
 
 
